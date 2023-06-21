@@ -28,16 +28,15 @@ local Library = {
 
     HudRegistry = {};
 
-    FontColor = Color3.fromRGB(191, 191, 191);
+    FontColor = Color3.fromRGB(118, 118, 118);
     FontColor2 = Color3.fromRGB(198, 198, 198);
-    MainColor = Color3.fromRGB(15, 15, 15);
-    MainColor2 = Color3.fromRGB(23, 23, 23);
-    BackgroundColor = Color3.fromRGB(16, 16, 16);
-    AccentColor = Color3.fromRGB(208, 123, 255);
-    OutlineColor = Color3.fromRGB(11, 11, 11);
+    MainColor = Color3.fromRGB(11, 11, 11);
+    SelectedTabColor = Color3.fromRGB(23, 23, 23);
+    BackgroundColor = Color3.fromRGB(15, 15, 15);
+    AccentColor = Color3.fromRGB(93, 88, 157);
+    OutlineColor = Color3.fromRGB(25, 25, 25);
 
     Black = Color3.new(0, 0, 0);
-    Font = Enum.Font.Code;
 
     OpenedFrames = {};
 
@@ -90,7 +89,7 @@ function Library:CreateLabel(Properties, IsHud)
         BackgroundTransparency = 1;
         Font = Enum.Font.Code;
         TextColor3 = Library.FontColor or Library.AccentColor;
-        TextSize = 15;
+        TextSize = 16;
         TextStrokeTransparency = 0;
     });
 
@@ -777,7 +776,7 @@ do
         });
 
         local ContainerLabel = Library:CreateLabel({
-            TextXAlignment = Enum.TextXAlignment.Left;
+            TextXAlignment = Enum.TextXAlignment.Center;
             Size = UDim2.new(1, 0, 0, 18);
             TextSize = 13;
             Visible = false;
@@ -2176,7 +2175,7 @@ do
 
     local WatermarkOuter = Library:Create('Frame', {
         BorderColor3 = Color3.new(0, 0, 0);
-        Position = UDim2.new(0, 100, 0, -25);
+        Position = UDim2.new(0, 160, 0, -30);
         Size = UDim2.new(0, 213, 0, 20);
         ZIndex = 200;
         Visible = false;
@@ -2280,7 +2279,7 @@ do
         Position = UDim2.fromOffset(5, 2),
         TextXAlignment = Enum.TextXAlignment.Center,
         
-        Text = '[ Keybinds ]';
+        Text = 'Keybinds';
         ZIndex = 104;
         Parent = KeybindInner;
     });
@@ -2314,12 +2313,11 @@ function Library:SetWatermarkVisibility(Bool)
 end;
 
 function Library:SetWatermark(Text)
-    local X, Y = Library:GetTextBounds(Text, Library.Font, 14);
-    Library.Watermark.Size = UDim2.new(0, X + 15, 0, (Y * 1.5) + 3);
-    Library:SetWatermarkVisibility(true)
+    local X, Y = Library:GetTextBounds(Text, Enum.Font.Code, 14);
+    Library.Watermark.Size = UDim2.new(0, 262, 0, 24);
 
     Library.WatermarkText.Text = Text;
-end
+end;
 
 function Library:Notify(Text, Time)
     local XSize, YSize = Library:GetTextBounds(Text, Enum.Font.Code, 14);
@@ -2592,7 +2590,7 @@ function Library:CreateWindow(...)
         });
 
         local Blocker = Library:Create('Frame', {
-            BackgroundColor3 = Library.MainColor2;
+            BackgroundColor3 = Library.SelectedTabColor;
             BorderSizePixel = 0;
             Position = UDim2.new(0, 0, 1, 0);
             Size = UDim2.new(1, 0, 0, 1);
@@ -2602,7 +2600,7 @@ function Library:CreateWindow(...)
         });
 
         Library:AddToRegistry(Blocker, {
-            BackgroundColor3 = 'MainColor2';
+            BackgroundColor3 = 'SelectedTabColor';
         });
 
         local TabFrame = Library:Create('Frame', {
@@ -2652,12 +2650,12 @@ function Library:CreateWindow(...)
 
             TabFrame.Visible = true;
             Blocker.BackgroundTransparency = 0;
-            TabButton.BackgroundColor3 = Library.MainColor2;
+            TabButton.BackgroundColor3 = Library.SelectedTabColor;
             TabButtonLabel.TextColor3 = Library.AccentColor;
             Highlight.BackgroundColor3 = Library.AccentColor;
             Highlight.ZIndex = 3;
             Highlight.Visible = true;
-            Library.RegistryMap[TabButton].Properties.BackgroundColor3 = 'MainColor2';
+            Library.RegistryMap[TabButton].Properties.BackgroundColor3 = 'SelectedTabColor';
             TabFrame.Visible = true;
         end;
 
